@@ -20,7 +20,7 @@ export default function Main() {
   return (
     <>
       <div className="controls">
-        <Select {...{ setIsLoading, setSelectedType, types, setPokemon }} />
+        <Select {...{ setIsLoading, setSelectedType, types, setPokemon, setQuery }} />
         <Query {...{ handleSearch, query, setQuery }} />
       </div>
       <PokemonDisplay {...{ pokemon, isLoading }} />

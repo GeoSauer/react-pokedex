@@ -1,7 +1,14 @@
 import { fetchPokemon } from '../../services/fetchData';
 import './controls.css';
 
-export default function Select({ types, setIsLoading, setSelectedType, setPokemon, setError }) {
+export default function Select({
+  types,
+  setIsLoading,
+  setSelectedType,
+  setPokemon,
+  setError,
+  setQuery,
+}) {
   const handleTypeChange = async (type) => {
     setIsLoading(true);
     setSelectedType(type);
@@ -9,6 +16,7 @@ export default function Select({ types, setIsLoading, setSelectedType, setPokemo
       const data = await fetchPokemon(type);
       setPokemon(data);
       setIsLoading(false);
+      setQuery('');
     } catch (error) {
       setError('Oops! Something went wrong');
     }
