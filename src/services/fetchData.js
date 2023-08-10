@@ -1,27 +1,27 @@
 export async function fetchInitialPokemon() {
-  const resp = await fetch('https://pokeapi.co/api/v2/pokemon/');
-  const { results } = await resp.json();
+  const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
+  const { results } = await response.json();
 
   const pokePromises = results.map(async (result) => {
     const response = await fetch(result.url);
     return response.json();
   });
 
-  const pokeDetails = await Promise.all(pokePromises);
-  return pokeDetails;
+  const pokemonDetails = await Promise.all(pokePromises);
+  return pokemonDetails;
 }
 
 export async function fetchTypes() {
-  const resp = await fetch('https://pokeapi.co/api/v2/type/');
-  const { results } = await resp.json();
+  const response = await fetch('https://pokeapi.co/api/v2/type/');
+  const { results } = await response.json();
   const types = results.map((result) => result.name);
   return types;
 }
 
-export async function searchPokemonByType(typeName) {
+export async function fetchPokemonByType(typeName) {
   try {
-    const typeResponse = await fetch(`https://pokeapi.co/api/v2/type/${typeName}/`);
-    const typeData = await typeResponse.json();
+    const response = await fetch(`https://pokeapi.co/api/v2/type/${typeName}/`);
+    const typeData = await response.json();
     const pokemonPromises = typeData.pokemon.map(async (pokemonInfo) => {
       const pokemonResponse = await fetch(pokemonInfo.pokemon.url);
       return pokemonResponse.json();
@@ -34,7 +34,7 @@ export async function searchPokemonByType(typeName) {
   }
 }
 
-export async function searchPokemonByName(name) {
+export async function fetchPokemonByName(name) {
   try {
     if (!name) {
       alert('Please enter a valid name');

@@ -1,8 +1,8 @@
-import usePokemon from '../../hooks/usePokemon';
+import { useSearch } from '../../context/PokemonContext';
 import './controls.css';
 
 export default function Query() {
-  const { handleQuerySearch, query, setQuery } = usePokemon();
+  const { query, setQuery, handleQuerySearch } = useSearch();
 
   return (
     <>

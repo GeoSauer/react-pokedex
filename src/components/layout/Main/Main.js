@@ -1,11 +1,11 @@
-import usePokemon from '../../../hooks/usePokemon.js';
 import Select from '../../Controls/Select';
 import Query from '../../Controls/Query.js';
 import PokemonDisplay from '../../Display/PokemonDisplay';
+import { usePokemonDetails } from '../../../context/PokemonContext';
 import '../../Controls/controls.css';
 
 export default function Main() {
-  const { error } = usePokemon();
+  const { error } = usePokemonDetails();
 
   return (
     <>

@@ -1,10 +1,10 @@
-import usePokemon from '../../hooks/usePokemon';
-import { useTypes } from '../../hooks/useTypes';
+import { useSearch, useTypes } from '../../context/PokemonContext';
 import './controls.css';
 
 export default function Select() {
-  const { handleTypeSearch } = usePokemon();
+  const { handleTypeSearch } = useSearch();
   const types = useTypes();
+
   return (
     <select onChange={(event) => handleTypeSearch(event.target.value)}>
       <option value="all">All</option>

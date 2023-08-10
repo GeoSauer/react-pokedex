@@ -4,7 +4,7 @@
 
 ## Attributes
 
-[Pokemon API](https://alchemy-pokedex.herokuapp.com/)
+[PokeAPI](https://pokeapi.co/)
 [Favicon](https://www.flaticon.com/free-icons/pokemon)
 
 ## Alchemy React Base Template
