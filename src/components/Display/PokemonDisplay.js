@@ -6,7 +6,7 @@ export default function PokemonDisplay({ pokemon, isLoading, error }) {
   return (
     <div className="display">
       {pokemon.map((pokemon) => (
-        <PokeCard key={pokemon._id} {...pokemon} />
+        <PokeCard key={pokemon.id} {...pokemon} />
       ))}
       <p className="error" style={{ color: 'red', fontWeight: '700' }}>
         {error}

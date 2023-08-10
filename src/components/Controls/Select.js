@@ -14,6 +14,7 @@ export default function Select({
     setSelectedType(type);
     try {
       const data = await fetchPokemon(type);
+      console.log(data);
       setPokemon(data);
       setIsLoading(false);
       setQuery('');
@@ -24,10 +25,10 @@ export default function Select({
 
   return (
     <select onChange={(event) => handleTypeChange(event.target.value)}>
-      <option value="all">all</option>
-      {types.map(({ type }) => (
+      <option value="all">All</option>
+      {types.map((type) => (
         <option key={type} value={type}>
-          {type}
+          {type.charAt(0).toUpperCase() + type.slice(1)}
         </option>
       ))}
     </select>
