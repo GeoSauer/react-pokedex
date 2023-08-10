@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
-import { fetchInitialPokemon, fetchPokemon } from '../services/fetchData.js';
+import {
+  fetchInitialPokemon,
+  searchPokemonByName,
+  searchPokemonByType,
+} from '../services/fetchData.js';
 
 export default function usePokemon() {
   const [pokemon, setPokemon] = useState([]);
-  const [selectedType, setSelectedType] = useState('all');
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    setIsLoading(true);
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const data = await fetchInitialPokemon();
         setPokemon(data);
@@ -22,12 +25,25 @@ export default function usePokemon() {
     fetchData();
   }, []);
 
-  const handleSearch = async () => {
+  const handleTypeSearch = async (type) => {
     setIsLoading(true);
     try {
-      const data = await fetchPokemon(selectedType, query);
+      const data = await searchPokemonByType(type);
       setPokemon(data);
       setIsLoading(false);
+      setQuery('');
+    } catch (error) {
+      setError('Oops! Something went wrong');
+    }
+  };
+
+  const handleQuerySearch = async () => {
+    setIsLoading(true);
+    try {
+      const data = await searchPokemonByName(query.toLowerCase());
+      setPokemon(data);
+      setIsLoading(false);
+      setQuery('');
     } catch (error) {
       setError('Oops! Something went wrong');
     }
@@ -37,10 +53,11 @@ export default function usePokemon() {
     pokemon,
     setPokemon,
     error,
+    setError,
     isLoading,
     setIsLoading,
-    setSelectedType,
-    handleSearch,
+    handleQuerySearch,
+    handleTypeSearch,
     query,
     setQuery,
   };

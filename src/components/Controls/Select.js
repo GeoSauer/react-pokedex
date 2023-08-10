@@ -1,30 +1,12 @@
-import { fetchPokemon } from '../../services/fetchData';
+import usePokemon from '../../hooks/usePokemon';
+import { useTypes } from '../../hooks/useTypes';
 import './controls.css';
 
-export default function Select({
-  types,
-  setIsLoading,
-  setSelectedType,
-  setPokemon,
-  setError,
-  setQuery,
-}) {
-  const handleTypeChange = async (type) => {
-    setIsLoading(true);
-    setSelectedType(type);
-    try {
-      const data = await fetchPokemon(type);
-      console.log(data);
-      setPokemon(data);
-      setIsLoading(false);
-      setQuery('');
-    } catch (error) {
-      setError('Oops! Something went wrong');
-    }
-  };
-
+export default function Select() {
+  const { handleTypeSearch } = usePokemon();
+  const types = useTypes();
   return (
-    <select onChange={(event) => handleTypeChange(event.target.value)}>
+    <select onChange={(event) => handleTypeSearch(event.target.value)}>
       <option value="all">All</option>
       {types.map((type) => (
         <option key={type} value={type}>

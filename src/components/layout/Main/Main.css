@@ -7,9 +7,11 @@
 }
 
 .error {
-  align-self: center;
   color: red;
+  display: flex;
   font-weight: 700;
+  justify-content: center;
+  margin-top: 40px;
 }
 
 .poke {
