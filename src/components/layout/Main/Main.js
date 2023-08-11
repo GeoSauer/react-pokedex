@@ -1,22 +1,13 @@
-import Select from '../../Controls/Select';
-import Query from '../../Controls/Query.js';
+import Controls from '../../Controls/Controls';
 import PokemonDisplay from '../../Display/PokemonDisplay';
-import { usePokemonDetails } from '../../../context/PokemonContext';
-import '../../Controls/controls.css';
+import Error from '../../Display/Error';
 
 export default function Main() {
-  const { error } = usePokemonDetails();
-
   return (
     <>
-      <div className="controls">
-        <Select />
-        <Query />
-      </div>
+      <Controls />
       <PokemonDisplay />
-      <div className="error">
-        <p>{error}</p>
-      </div>
+      <Error />
     </>
   );
 }

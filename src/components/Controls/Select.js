@@ -6,7 +6,13 @@ export default function Select() {
   const types = useTypes();
 
   return (
-    <select onChange={(event) => handleTypeSearch(event.target.value)}>
+    <select defaultValue onChange={(event) => handleTypeSearch(event.target.value)}>
+      {/* //TODO circle back on why this isn't visible 
+			//add 'selected' to the below option fixes it but */}
+      causes an error
+      <option value="" disabled hidden>
+        Type
+      </option>
       <option value="all">All</option>
       {types.map((type) => (
         <option key={type} value={type}>

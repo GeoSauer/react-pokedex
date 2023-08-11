@@ -57,7 +57,6 @@ export function useTypes() {
 }
 
 export function useSearch() {
-  const [query, setQuery] = useState('');
   const { setIsLoading, setPokemon, setError } = usePokemonDetails();
 
   async function handleTypeSearch(type) {
@@ -76,13 +75,12 @@ export function useSearch() {
     }
   }
 
-  async function handleQuerySearch() {
+  async function handleQuerySearch(query) {
     setIsLoading(true);
     try {
       const data = await fetchPokemonByName(query.toLowerCase());
       setPokemon(data);
       setIsLoading(false);
-      setQuery('');
     } catch (error) {
       setError('Oops! Something went wrong');
     }

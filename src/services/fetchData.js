@@ -36,18 +36,14 @@ export async function fetchPokemonByType(typeName) {
 
 export async function fetchPokemonByName(name) {
   try {
-    if (!name) {
+    const nameResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`);
+    if (nameResponse.status !== 200) {
       alert('Please enter a valid name');
-    } else {
-      const nameResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`);
-      if (nameResponse.status !== 200) {
-        alert('Please enter a valid name');
-      }
-      const pokemonDetails = await nameResponse.json();
-      return pokemonDetails;
     }
+    const pokemonDetails = await nameResponse.json();
+    return pokemonDetails;
   } catch (error) {
-    console.error('Error searching for Pokémon by type:', error);
+    console.error('Error searching for Pokémon by name:', error);
     throw error;
   }
 }
