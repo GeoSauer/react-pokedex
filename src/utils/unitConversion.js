@@ -5,7 +5,13 @@ export const hectogramsToPounds = (num) => {
 
 export const decimetersToFeetAndInches = (num) => {
   const totalInches = num * 3.937;
-  const feet = Math.floor(totalInches / 12);
-  const inches = Math.round(totalInches % 12);
+  let feet = Math.floor(totalInches / 12);
+  let inches = Math.round(totalInches % 12);
+
+  if (inches >= 12) {
+    feet += Math.floor(inches / 12);
+    inches %= 12;
+  }
+
   return { feet, inches };
 };
