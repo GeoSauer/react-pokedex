@@ -8,6 +8,7 @@ export default function Query() {
   const { setIsLoading } = usePokemonDetails();
 
   //TODO keyDown is clearing input but button click is not for some reason
+  //TODO combine the select/query so users can search by name only within the selected list
   const handleSearch = async () => {
     if (query.trim() === '') {
       alert('Please enter a valid name');

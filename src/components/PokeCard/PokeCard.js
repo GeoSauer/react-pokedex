@@ -2,51 +2,66 @@ import './PokeCard.css';
 import pokeBackground from '../../../src/mtn-bkgrd.jpeg';
 
 export default function PokeCard({
-  url_image,
-  pokebase,
-  attack,
-  defense,
-  hp,
+  // url_image,
+  name,
+  // attack,
+  // defense,
+  // hp,
   height,
+  id,
   weight,
-  type_1,
-  species_id,
-  ability_1,
-  ability_2,
-  ability_hidden,
-  pokedex,
-  color_1,
+  // type_1,
+  // species_id,
+  // ability_1,
+  // ability_2,
+  // ability_hidden,
+  // pokedex,
+  // color_1,
+  other,
+  types,
 }) {
+  console.log(types);
   return (
-    <div className="poke-card hvr-grow-shadow" style={{ background: color_1 }}>
+    <div
+      className="poke-card hvr-grow-shadow"
+      // style={{ background: other.dream_world.front_default }}
+    >
       <div className="card-header">
-        <span className="name">{pokebase}</span>
-        <span className="hp">{hp} HP</span>
+        <span className="name">{name}</span>
+        <span className="hp">{} HP</span>
       </div>{' '}
       <div
         className="img-container"
         style={{ background: `url(${pokeBackground})`, backgroundRepeat: 'no-repeat' }}
       >
-        <a href={pokedex} target="_blank" rel="noreferrer">
-          <img src={url_image} className="hvr-grow-rotate" />
-        </a>
+        {/* <a href={pokedex} target="_blank" rel="noreferrer"> */}
+        {/* <img src={url_image} className="hvr-grow-rotate" /> */}
+        {/* </a> */}
       </div>
       <div className="physical-stats">
-        <span>{type_1} Pokemon. </span>
-        <span>Length: {height}ft, </span>
+        <span>
+          {types.map((type, i) => (
+            <span key={i}>
+              {type.type.name}
+              {i !== types.length - 1 ? '/' : ' '}
+            </span>
+          ))}
+          Pokémon
+        </span>
+        <span>Length: {height}&apos;&apos;, </span>
         <span>Weight: {weight}lbs.</span>
       </div>
       <div className="abilities">
-        <p>{ability_1}</p>
+        {/* <p>{ability_1}</p> */}
         <hr />
-        <p>{ability_2}</p>
+        {/* <p>{ability_2}</p> */}
         <hr />
-        <p>{ability_hidden}</p>
+        {/* <p>{ability_hidden}</p> */}
       </div>
       <div className="card-footer">
-        <span>Attack: {attack}</span>
-        <span>Defense: {defense}</span>
-        <span>{species_id}/801</span>
+        {/* <span>Attack: {attack}</span> */}
+        {/* <span>Defense: {defense}</span> */}
+        <span>{id}/801</span>
       </div>
     </div>
   );
