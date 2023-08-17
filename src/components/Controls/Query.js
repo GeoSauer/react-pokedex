@@ -48,7 +48,6 @@ export default function Query() {
         type="text"
         pattern="[A-Za-z]"
         placeholder="Search by name..."
-        // onChange={(event) => setQuery(event.target.value)}
         onChange={(event) => {
           const newValue = event.target.value;
           if (/^[A-Za-z]*$/.test(newValue)) {

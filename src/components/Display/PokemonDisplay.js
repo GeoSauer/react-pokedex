@@ -5,7 +5,6 @@ import '../layout/Main/Main.css';
 
 export default function PokemonDisplay() {
   const { pokemon, isLoading, error } = usePokemonDetails();
-
   if (isLoading && !error) return <div className="poke bounce"></div>;
 
   if (error) {
