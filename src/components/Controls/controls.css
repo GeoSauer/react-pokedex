@@ -15,6 +15,7 @@ button {
   border: var(--color5) solid 1px;
   color: var(--color5);
 }
+
 select {
   border-radius: 5px;
   margin-left: 5px;

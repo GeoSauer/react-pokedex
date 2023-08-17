@@ -2,11 +2,15 @@ import './PokeCard.css';
 import pokeBackground from '../../../src/mtn-bkgrd.jpeg';
 import { decimetersToFeetAndInches, hectogramsToPounds } from '../../utils/unitConversion';
 import { useState } from 'react';
+import { usePokemonDetails } from '../../context/PokemonContext';
 
 export default function PokeCard({ abilities, name, height, id, weight, sprites, stats, types }) {
+  const { artStyle } = usePokemonDetails();
   const [view, setView] = useState('front');
   const weightInPounds = hectogramsToPounds(weight);
   const length = decimetersToFeetAndInches(height);
+  const attack = stats[1].base_stat;
+  const defense = stats[2].base_stat;
 
   const handleFlip = () => {
     view === 'front' ? setView('back') : setView('front');
@@ -17,13 +21,13 @@ export default function PokeCard({ abilities, name, height, id, weight, sprites,
       <div className="card-header">
         <span className="name">{name}</span>
         <span className="hp">{stats[0].base_stat} HP</span>
-      </div>{' '}
+      </div>
       <div
         className="img-container"
         style={{ background: `url(${pokeBackground})`, backgroundRepeat: 'no-repeat' }}
       >
         <button onClick={handleFlip}>
-          <img src={sprites[`${view}_default`]} className="hvr-grow-rotate" />
+          <img src={sprites[`${view}_${artStyle}`]} className="hvr-grow-rotate" />
         </button>
       </div>
       <div className="physical-stats">
@@ -50,8 +54,8 @@ export default function PokeCard({ abilities, name, height, id, weight, sprites,
         ))}
       </div>
       <div className="card-footer">
-        <span>Attack: {stats[1].base_stat}</span>
-        <span>Defense: {stats[2].base_stat}</span>
+        <span>Attack: {attack}</span>
+        <span>Defense: {defense}</span>
         <span>{id}/1281</span>
       </div>
     </div>
