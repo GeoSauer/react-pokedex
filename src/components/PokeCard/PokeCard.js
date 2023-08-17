@@ -1,10 +1,16 @@
 import './PokeCard.css';
 import pokeBackground from '../../../src/mtn-bkgrd.jpeg';
 import { decimetersToFeetAndInches, hectogramsToPounds } from '../../utils/unitConversion';
+import { useState } from 'react';
 
 export default function PokeCard({ abilities, name, height, id, weight, sprites, stats, types }) {
+  const [view, setView] = useState('front');
   const weightInPounds = hectogramsToPounds(weight);
   const length = decimetersToFeetAndInches(height);
+
+  const handleFlip = () => {
+    view === 'front' ? setView('back') : setView('front');
+  };
 
   return (
     <div className="poke-card hvr-grow-shadow">
@@ -16,9 +22,9 @@ export default function PokeCard({ abilities, name, height, id, weight, sprites,
         className="img-container"
         style={{ background: `url(${pokeBackground})`, backgroundRepeat: 'no-repeat' }}
       >
-        {/* <a href={pokedex} target="_blank" rel="noreferrer"> */}
-        <img src={sprites.front_default} className="hvr-grow-rotate" />
-        {/* </a> */}
+        <button onClick={handleFlip}>
+          <img src={sprites[`${view}_default`]} className="hvr-grow-rotate" />
+        </button>
       </div>
       <div className="physical-stats">
         <span>

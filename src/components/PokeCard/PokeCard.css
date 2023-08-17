@@ -24,6 +24,11 @@
   width: 180px;
 }
 
+.poke-card button {
+  border: none;
+  background: none;
+}
+
 .img-container {
   background-color: #cdb98c;
   border-image: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) 1;

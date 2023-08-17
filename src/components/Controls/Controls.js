@@ -1,11 +1,11 @@
-import Select from './Select';
 import Query from './Query';
 import './controls.css';
+import Type from './Type';
 
 export default function Controls() {
   return (
     <div className="controls">
-      <Select />
+      <Type />
       <Query />
     </div>
   );
