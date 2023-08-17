@@ -1,29 +1,13 @@
-import usePokemon from '../../../hooks/usePokemon.js';
-import { useTypes } from '../../../hooks/useTypes';
-import Select from '../../Controls/Select';
-import Query from '../../Controls/Query.js';
+import Controls from '../../Controls/Controls';
 import PokemonDisplay from '../../Display/PokemonDisplay';
-import '../../Controls/controls.css';
+import Error from '../../Display/Error';
 
 export default function Main() {
-  const {
-    pokemon,
-    setPokemon,
-    setSelectedType,
-    isLoading,
-    setIsLoading,
-    handleSearch,
-    query,
-    setQuery,
-  } = usePokemon();
-  const types = useTypes();
   return (
     <>
-      <div className="controls">
-        <Select {...{ setIsLoading, setSelectedType, types, setPokemon, setQuery }} />
-        <Query {...{ handleSearch, query, setQuery }} />
-      </div>
-      <PokemonDisplay {...{ pokemon, isLoading }} />
+      <Controls />
+      <PokemonDisplay />
+      <Error />
     </>
   );
 }

@@ -1,16 +1,34 @@
-import '../layout/Main/Main.css';
+import { usePokemonDetails } from '../../context/PokemonContext';
 import PokeCard from '../PokeCard/PokeCard';
+import Error from '../Display/Error';
+import '../layout/Main/Main.css';
 
-export default function PokemonDisplay({ pokemon, isLoading, error }) {
+export default function PokemonDisplay() {
+  const { pokemon, isLoading, error } = usePokemonDetails();
+
   if (isLoading && !error) return <div className="poke bounce"></div>;
+
+  if (error) {
+    <Error />;
+  }
+
+  if (!pokemon) {
+    return null;
+  }
+
+  if (!Array.isArray(pokemon)) {
+    return (
+      <div className="display">
+        <PokeCard {...pokemon} />
+      </div>
+    );
+  }
+
   return (
     <div className="display">
       {pokemon.map((pokemon) => (
-        <PokeCard key={pokemon._id} {...pokemon} />
+        <PokeCard key={pokemon.id} {...pokemon} />
       ))}
-      <p className="error" style={{ color: 'red', fontWeight: '700' }}>
-        {error}
-      </p>
     </div>
   );
 }

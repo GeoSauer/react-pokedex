@@ -1,33 +1,22 @@
-import { fetchPokemon } from '../../services/fetchData';
+import { useSearch, useTypes } from '../../context/PokemonContext';
 import './controls.css';
 
-export default function Select({
-  types,
-  setIsLoading,
-  setSelectedType,
-  setPokemon,
-  setError,
-  setQuery,
-}) {
-  const handleTypeChange = async (type) => {
-    setIsLoading(true);
-    setSelectedType(type);
-    try {
-      const data = await fetchPokemon(type);
-      setPokemon(data);
-      setIsLoading(false);
-      setQuery('');
-    } catch (error) {
-      setError('Oops! Something went wrong');
-    }
-  };
+export default function Select() {
+  const { handleTypeSearch } = useSearch();
+  const types = useTypes();
 
   return (
-    <select onChange={(event) => handleTypeChange(event.target.value)}>
-      <option value="all">all</option>
-      {types.map(({ type }) => (
+    <select defaultValue onChange={(event) => handleTypeSearch(event.target.value)}>
+      {/* //TODO circle back on why this isn't visible 
+			//add 'selected' to the below option fixes it but */}
+      causes an error
+      <option value="" disabled hidden>
+        Type
+      </option>
+      <option value="all">All</option>
+      {types.map((type) => (
         <option key={type} value={type}>
-          {type}
+          {type.charAt(0).toUpperCase() + type.slice(1)}
         </option>
       ))}
     </select>

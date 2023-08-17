@@ -1,29 +1,49 @@
 export async function fetchInitialPokemon() {
-  const resp = await fetch('https://alchemy-pokedex.herokuapp.com/api/pokedex/');
-  const data = await resp.json();
-  return data.results;
+  const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
+  const { results } = await response.json();
+
+  const pokePromises = results.map(async (result) => {
+    const response = await fetch(result.url);
+    return response.json();
+  });
+
+  const pokemonDetails = await Promise.all(pokePromises);
+  return pokemonDetails;
 }
 
 export async function fetchTypes() {
-  const resp = await fetch('https://alchemy-pokedex.herokuapp.com/api/pokedex/types');
-  const data = await resp.json();
-  return data;
+  const response = await fetch('https://pokeapi.co/api/v2/type/');
+  const { results } = await response.json();
+  const types = results.map((result) => result.name);
+  return types;
 }
 
-export async function fetchPokemon(type, query) {
-  const params = new URLSearchParams();
-  if (type !== 'all') {
-    params.set('type', type);
+export async function fetchPokemonByType(typeName) {
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/type/${typeName}/`);
+    const typeData = await response.json();
+    const pokemonPromises = typeData.pokemon.map(async (pokemonInfo) => {
+      const pokemonResponse = await fetch(pokemonInfo.pokemon.url);
+      return pokemonResponse.json();
+    });
+    const pokemonDetails = await Promise.all(pokemonPromises);
+    return pokemonDetails;
+  } catch (error) {
+    console.error('Error searching for Pokémon by type:', error);
+    throw error;
   }
-  if (query) {
-    params.set('pokemon', query);
-  }
-  const resp = await fetch(
-    `https://alchemy-pokedex.herokuapp.com/api/pokedex/?${params.toString()}`
-  );
-  const data = await resp.json();
-  return data.results;
 }
 
-// species_id = pokedex number
-// replace NA with ""
+export async function fetchPokemonByName(name) {
+  try {
+    const nameResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`);
+    if (nameResponse.status !== 200) {
+      alert('Please enter a valid name');
+    }
+    const pokemonDetails = await nameResponse.json();
+    return pokemonDetails;
+  } catch (error) {
+    console.error('Error searching for Pokémon by name:', error);
+    throw error;
+  }
+}
