@@ -45,8 +45,15 @@ export default function Query() {
       <input
         value={query}
         type="text"
+        pattern="[A-Za-z]"
         placeholder="Search by name..."
-        onChange={(event) => setQuery(event.target.value)}
+        // onChange={(event) => setQuery(event.target.value)}
+        onChange={(event) => {
+          const newValue = event.target.value;
+          if (/^[A-Za-z]*$/.test(newValue)) {
+            setQuery(newValue);
+          }
+        }}
         onKeyDown={handleKeyDown}
       ></input>
       <button onClick={handleSearch}>Go!</button>
