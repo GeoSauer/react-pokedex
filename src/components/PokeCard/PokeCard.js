@@ -2,30 +2,10 @@ import './PokeCard.css';
 import pokeBackground from '../../../src/mtn-bkgrd.jpeg';
 import { decimetersToFeetAndInches, hectogramsToPounds } from '../../utils/unitConversion';
 
-export default function PokeCard({
-  // url_image,
-  abilities,
-  name,
-  // attack,
-  // defense,
-  // hp,
-  height,
-  id,
-  weight,
-  // type_1,
-  // species_id,
-  // ability_1,
-  // ability_2,
-  // ability_hidden,
-  // pokedex,
-  // color_1,
-  sprites,
-  stats,
-  types,
-}) {
-  console.log(stats);
+export default function PokeCard({ abilities, name, height, id, weight, sprites, stats, types }) {
   const weightInPounds = hectogramsToPounds(weight);
   const length = decimetersToFeetAndInches(height);
+
   return (
     <div className="poke-card hvr-grow-shadow">
       <div className="card-header">
