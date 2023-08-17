@@ -1,5 +1,6 @@
 import './PokeCard.css';
 import pokeBackground from '../../../src/mtn-bkgrd.jpeg';
+import { decimetersToFeetAndInches, hectogramsToPounds } from '../../utils/unitConversion';
 
 export default function PokeCard({
   // url_image,
@@ -17,15 +18,14 @@ export default function PokeCard({
   // ability_hidden,
   // pokedex,
   // color_1,
-  other,
+  sprites,
   types,
 }) {
-  console.log(types);
+  console.log(sprites);
+  const weightInPounds = hectogramsToPounds(weight);
+  const length = decimetersToFeetAndInches(height);
   return (
-    <div
-      className="poke-card hvr-grow-shadow"
-      // style={{ background: other.dream_world.front_default }}
-    >
+    <div className="poke-card hvr-grow-shadow" style={{ background: sprites.front_default }}>
       <div className="card-header">
         <span className="name">{name}</span>
         <span className="hp">{} HP</span>
@@ -35,7 +35,7 @@ export default function PokeCard({
         style={{ background: `url(${pokeBackground})`, backgroundRepeat: 'no-repeat' }}
       >
         {/* <a href={pokedex} target="_blank" rel="noreferrer"> */}
-        {/* <img src={url_image} className="hvr-grow-rotate" /> */}
+        <img src={sprites.front_default} className="hvr-grow-rotate" />
         {/* </a> */}
       </div>
       <div className="physical-stats">
@@ -48,8 +48,10 @@ export default function PokeCard({
           ))}
           Pokémon
         </span>
-        <span>Length: {height}&apos;&apos;, </span>
-        <span>Weight: {weight}lbs.</span>
+        <span>
+          Length: {length.feet}&apos; {length.inches}&apos;&apos;,{' '}
+        </span>
+        <span>Weight: {weightInPounds}lbs.</span>
       </div>
       <div className="abilities">
         {/* <p>{ability_1}</p> */}
@@ -61,7 +63,7 @@ export default function PokeCard({
       <div className="card-footer">
         {/* <span>Attack: {attack}</span> */}
         {/* <span>Defense: {defense}</span> */}
-        <span>{id}/801</span>
+        <span>{id}/1281</span>
       </div>
     </div>
   );
