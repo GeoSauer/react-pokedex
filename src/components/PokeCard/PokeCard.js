@@ -4,6 +4,7 @@ import { decimetersToFeetAndInches, hectogramsToPounds } from '../../utils/unitC
 
 export default function PokeCard({
   // url_image,
+  abilities,
   name,
   // attack,
   // defense,
@@ -19,16 +20,17 @@ export default function PokeCard({
   // pokedex,
   // color_1,
   sprites,
+  stats,
   types,
 }) {
-  console.log(sprites);
+  console.log(stats);
   const weightInPounds = hectogramsToPounds(weight);
   const length = decimetersToFeetAndInches(height);
   return (
-    <div className="poke-card hvr-grow-shadow" style={{ background: sprites.front_default }}>
+    <div className="poke-card hvr-grow-shadow">
       <div className="card-header">
         <span className="name">{name}</span>
-        <span className="hp">{} HP</span>
+        <span className="hp">{stats[0].base_stat} HP</span>
       </div>{' '}
       <div
         className="img-container"
@@ -54,15 +56,16 @@ export default function PokeCard({
         <span>Weight: {weightInPounds}lbs.</span>
       </div>
       <div className="abilities">
-        {/* <p>{ability_1}</p> */}
-        <hr />
-        {/* <p>{ability_2}</p> */}
-        <hr />
-        {/* <p>{ability_hidden}</p> */}
+        {abilities.map((ability, i) => (
+          <span key={i}>
+            {ability.ability.name.replace('-', ' ')}
+            {i !== abilities.length - 1 ? <hr /> : null}
+          </span>
+        ))}
       </div>
       <div className="card-footer">
-        {/* <span>Attack: {attack}</span> */}
-        {/* <span>Defense: {defense}</span> */}
+        <span>Attack: {stats[1].base_stat}</span>
+        <span>Defense: {stats[2].base_stat}</span>
         <span>{id}/1281</span>
       </div>
     </div>
