@@ -14,6 +14,7 @@ button {
   background-color: var(--color2);
   border: var(--color5) solid 1px;
   color: var(--color5);
+  cursor: pointer;
 }
 
 select {
