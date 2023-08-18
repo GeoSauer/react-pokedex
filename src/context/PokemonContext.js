@@ -13,6 +13,8 @@ export default function PokemonProvider({ children }) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [artStyle, setArtStyle] = useState('default');
+  const [generation, setGeneration] = useState('default');
+  const [version, setVersion] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +39,10 @@ export default function PokemonProvider({ children }) {
     setError,
     artStyle,
     setArtStyle,
+    generation,
+    setGeneration,
+    version,
+    setVersion,
   };
 
   return <PokemonContext.Provider value={value}>{children}</PokemonContext.Provider>;

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { usePokemonDetails } from '../../context/PokemonContext';
 
 export default function PokeCard({ abilities, name, height, id, weight, sprites, stats, types }) {
-  const { artStyle } = usePokemonDetails();
+  const { artStyle, generation } = usePokemonDetails();
   const [view, setView] = useState('front');
   const weightInPounds = hectogramsToPounds(weight);
   const length = decimetersToFeetAndInches(height);
@@ -27,7 +27,14 @@ export default function PokeCard({ abilities, name, height, id, weight, sprites,
         style={{ background: `url(${pokeBackground})`, backgroundRepeat: 'no-repeat' }}
       >
         <button onClick={handleFlip}>
-          <img src={sprites[`${view}_${artStyle}`]} className="hvr-grow-rotate" />
+          {generation === 'default' ? (
+            <img src={sprites[`${view}_${artStyle}`]} className="hvr-grow-rotate" />
+          ) : (
+            <img
+              src={sprites.versions[`${generation}.${view}_${artStyle}`]}
+              className="hvr-grow-rotate"
+            />
+          )}
         </button>
       </div>
       <div className="physical-stats">

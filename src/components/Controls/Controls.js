@@ -2,6 +2,7 @@ import Query from './Query';
 import './controls.css';
 import Type from './Type';
 import Style from './Style';
+import Generation from './Generation';
 
 export default function Controls() {
   return (
@@ -9,6 +10,7 @@ export default function Controls() {
       <Type />
       <Query />
       <Style />
+      <Generation />
     </div>
   );
 }
